@@ -13,6 +13,9 @@ jobs:
         id: step1
         run: |
           TXT=$(ls -la)
+          TXT="${TXT//'%'/'%25'}"
+          TXT="${TXT//$'\n'/'%0A'}"
+          TXT="${TXT//$'\r'/'%0D'}"
           echo "text=$TXT" >> $GITHUB_ENV
       - name: second
         id: step2
