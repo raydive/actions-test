@@ -12,7 +12,7 @@ jobs:
       - name: first
         id: step1
         run: |
-          TXT=$(npm install -g bats)
+          TXT=$(ls -la)
           echo "text=$TXT" >> $GITHUB_ENV
       - name: second
         id: step2
