@@ -9,6 +9,7 @@ jobs:
       - name: first
         id: step1
         run: |
+          gh issue create --title "Issue created from Github Action" --body "$(ls -la)"
           TXT=$(ls -la)
           echo $TXT
           delimiter="$(openssl rand -hex 8)"
