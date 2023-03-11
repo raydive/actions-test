@@ -15,6 +15,7 @@ jobs:
           gh issue create --title "Issue created from Github Action" --body "$(ls -la)"
           TXT=$(ls -la)
           echo $TXT
+          gh issue create --title "Issue created from Github Action" --body "$TXT"
           delimiter="$(openssl rand -hex 8)"
           echo "text<<${delimiter}" >> "${GITHUB_ENV}"
           echo $TXT >> "${GITHUB_ENV}"
