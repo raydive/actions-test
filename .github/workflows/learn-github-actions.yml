@@ -16,6 +16,8 @@ jobs:
           echo "text<<${delimiter}" >> "${GITHUB_ENV}"
           echo $TXT >> "${GITHUB_ENV}"
           echo "${delimiter}" >> "${GITHUB_ENV}"
+        env:
+          GH_TOKEN: ${{ github.token }}
       - name: second
         id: step2
         run: |
