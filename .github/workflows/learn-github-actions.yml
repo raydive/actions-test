@@ -24,3 +24,5 @@ jobs:
         run: |
           echo ${{ env.text }}
           gh issue create --title "Issue created from Github Action step2" --body "${{ env.text }}"
+        env:
+          GH_TOKEN: ${{ github.token }}
