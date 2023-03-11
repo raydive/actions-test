@@ -10,6 +10,7 @@ jobs:
         id: step1
         run: |
           TXT=$(ls -la)
+          echo $TXT
           delimiter="$(openssl rand -hex 8)"
           echo "text<<${delimiter}" >> "${GITHUB_ENV}"
           echo $TXT >> "${GITHUB_ENV}"
