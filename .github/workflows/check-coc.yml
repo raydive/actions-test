@@ -8,12 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run Clippy and post issues
+      - name: Run Clippy for cognitive complexity and post issues
         run: |
+          CURRENT_DATETIME=$(date +'%Y-%m-%d %H:%M:%S')
           RESULT=$(cargo clippy -- -W clippy::cognitive_complexity 2>&1 > /dev/null)
           echo -e $RESULT
           if [[ "$RESULT" == *warning* ]]; then
-            gh issue create --title "Cognitive Complexity Report " --body "\`\`\`rust 
+            gh issue create --title "Cognitive Complexity Report $CURRENT_DATETIME" --body "\`\`\`rust 
             $RESULT
             \`\`\`"
           else
@@ -21,3 +22,4 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ github.token }}
+          TZ: 'Asia/Tokyo' # タイムゾーン指定
