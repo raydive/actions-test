@@ -1,0 +1,23 @@
+name: Check CoC and reported
+on: [push]
+permissions:
+  issues: write
+jobs:
+  check-coc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run Clippy and post issues
+        run: |
+          RESULT=$(cargo clippy -- -W clippy::cognitive_complexity 2>&1 > /dev/null)
+          echo -e $RESULT
+          if [[ "$RESULT" == *warning* ]]; then
+            gh issue create --title "Cognitive Complexity Report " --body "\`\`\`rust 
+            $RESULT
+            \`\`\`"
+          else
+            echo "Clean Code"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
